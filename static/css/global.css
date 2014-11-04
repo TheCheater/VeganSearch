@@ -1,0 +1,245 @@
+/* Global */
+
+body {
+    direction: rtl;
+}
+
+h2 {
+    font-size: 28px;
+}
+
+dl {
+    margin: 0;
+}
+
+dd {
+    margin: 0 0 10px;
+}
+
+.row {
+    margin: 0;
+}
+
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3,
+.col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6,
+.col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9,
+.col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    padding: 0;
+}
+
+.errorMessage {
+    color: #c0392b;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* Layout */
+
+.container {
+    max-width: 730px;
+}
+
+#header {
+    padding: 20px 0 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+#header #website-title,
+#header #website-subtitle {
+    line-height: 1;
+}
+
+#header #website-title {
+    font-size: 30px;
+}
+
+#header #website-subtitle {
+    font-size: 19px;
+    color: #777777;
+}
+
+#content {
+    margin: 30px 0;
+}
+
+#footer {
+    border-top: 1px solid #e5e5e5;
+    padding-top: 19px;
+    color: #777777;
+}
+
+/* Index */
+
+#index-input {
+    width: 70%;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+#index-guide {
+    margin-top: 20px;
+    color: #777777;
+}
+
+/* Search */
+
+#search-input {
+    margin-bottom: 10px;
+}
+
+@media (min-width: 480px)
+{
+    #search-input {
+        display: inline-block;
+        width: auto;
+        margin: 0;
+    }
+}
+
+#search-tabs {
+    margin-top: 20px;
+}
+
+/* Search Results */
+
+.search-results-empty {
+    margin-top: 10px;
+}
+
+.search-result {
+    padding: 10px 0;
+    border-bottom: 1px dashed #e5e5e5;
+}
+
+.search-result .col-xs-3 {
+    padding-right: 10px;
+}
+
+.search-result .img-thumbnail {
+    max-height: 100px;
+    width: auto;
+}
+
+.search-result-name {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.search-result-status {
+    margin-top: 5px;
+}
+
+.search-result-status .vegan {
+    color: #27ae60;
+}
+
+.search-result-status .maybe-vegan {
+    color: #f39c12;
+}
+
+.search-result-status .not-vegan {
+    color: #c0392b;
+}
+
+.search-results-information {
+    color: #999999;
+    margin-top: 10px;
+}
+
+/* Tabs */
+
+.ui-tabs-nav {
+    margin: 0;
+    padding: 0 0 10px 0;
+    list-style-type: none;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.ui-state-default {
+    display: inline;
+    position: relative;
+    top: 4px;
+    padding: 10px;
+}
+
+.ui-state-default:focus,
+.ui-state-default a:focus {
+    outline: 0;
+    text-decoration: none;
+    color: inherit;
+}
+
+.ui-tabs-active {
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-width: 0;
+    padding: 9px;
+}
+
+.ui-tabs-active a {
+    color: #333333;
+}
+
+/* Search Results - Pages & Summary */
+
+#search-tabs .pager,
+#search-tabs .summary {
+    margin-top: 10px;
+}
+
+#search-tabs .pager .selected:hover a {
+    background-color: #2e6ab1;
+}
+
+#search-tabs .pager .next,
+#search-tabs .pager .previous {
+    display: none;
+}
+
+/* Product and Ingredient Pages */
+
+.product-section,
+.ingredient-section {
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #e5e5e5;
+}
+
+#product #product-name {
+    margin-top: 0;
+}
+
+#product .col-sm-3 {
+    padding-right: 10px;
+}
+
+#product .col-sm-3 .img-thumbnail {
+    max-height: 300px;
+    width: auto;
+    height: auto;
+}
+
+@media (max-width: 767px)
+{
+    #product .col-sm-3 {
+        text-align: center;
+        padding: 0 0 30px;
+        margin: 0 0 10px;
+        border-bottom: 1px dashed #e5e5e5;
+    }
+}
+
+/* Contact */
+
+.contact-alert {
+    margin-top: 10px;
+    padding: 5px;
+}
+
+@media (min-width: 768px) {
+    .contact-input,
+    .contact-alert {
+        width: 50%;
+    }
+}
