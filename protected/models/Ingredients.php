@@ -18,29 +18,4 @@ class Ingredients extends CActiveRecord
         return 'id';
     }
 
-    public function search()
-    {
-        $criteria = new CDbCriteria();
-
-        $criteria->compare('id', $this->id, true);
-
-        $criteria->compare('name', $this->name, true);
-
-        $criteria->compare('e_number', $this->e_number, true);
-
-        return new CActiveDataProvider('Ingredients', array(
-
-            'criteria' => $criteria,
-
-            'sort' => array(
-                'defaultOrder' => 'id DESC'
-            ),
-
-            'pagination' => array(
-                'pageSize' => 50
-            )
-
-        ));
-    }
-
 }
