@@ -22,7 +22,7 @@ class SearchController extends VController
                     'criteria' => array(
                         'condition' => 'name LIKE :name OR barcode = :barcode',
                         'params' => array(
-                            ':name' => (is_numeric($searchModel->q) ? '' : '%' . $searchModel->q . '%'),
+                            ':name' => (is_numeric($searchModel->q) ? '' : '%' . str_replace(' ', '%', $searchModel->q) . '%'),
                             ':barcode' => $searchModel->q
                         )
                     ),
@@ -38,7 +38,7 @@ class SearchController extends VController
                     'criteria' => array(
                         'condition' => 'name LIKE :name OR e_number LIKE :eNumber',
                         'params' => array(
-                            ':name' => '%' . $searchModel->q . '%',
+                            ':name' => '%' . str_replace(' ', '%', $searchModel->q) . '%',
                             ':eNumber' => '%' . str_replace(array('e', 'E'), '', $searchModel->q) . '%'
                         )
                     ),
@@ -60,11 +60,21 @@ class SearchController extends VController
             }
         }
 
-        $this->render('index', array(
-            'searchModel' => $searchModel,
-            'products' => $products,
-            'ingredients' => $ingredients
-        ));
+        if (isset($_GET['json']))
+        {
+            $this->layout = false;
+            $this->render('json', array(
+                'searchModel' => $searchModel,
+                'products' => $products,
+                'ingredients' => $ingredients
+            ));
+        }
+        else
+            $this->render('index', array(
+                'searchModel' => $searchModel,
+                'products' => $products,
+                'ingredients' => $ingredients
+            ));
     }
 
 }

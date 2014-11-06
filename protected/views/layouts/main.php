@@ -48,6 +48,7 @@
         <p>כל הזכויות שמורות <?php echo Yii::app()->name; ?> © 2014</p>
 
         <p>
+            <?php echo CHtml::link('קוד פתוח', 'https://github.com/TheCheater/VeganSearch'); ?> ·
             <?php echo CHtml::link('תנאי השימוש', array('site/terms')); ?> ·
             <?php echo CHtml::link('צור קשר', array('site/contact')); ?>
         </p>
