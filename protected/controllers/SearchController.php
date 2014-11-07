@@ -18,13 +18,12 @@ class SearchController extends VController
 
             if ($searchModel->validate())
             {
+                $searchObject = new VSearch($searchModel->q);
+
                 $products = new CActiveDataProvider('Products', array(
                     'criteria' => array(
-                        'condition' => 'name LIKE :name OR barcode = :barcode',
-                        'params' => array(
-                            ':name' => (is_numeric($searchModel->q) ? '' : '%' . str_replace(' ', '%', $searchModel->q) . '%'),
-                            ':barcode' => $searchModel->q
-                        )
+                        'condition' => $searchObject->productSearchQuery(),
+                        'params' => $searchObject->productSearchParams()
                     ),
                     'sort' => array(
                         'defaultOrder' => 'name ASC'
@@ -36,11 +35,8 @@ class SearchController extends VController
 
                 $ingredients = new CActiveDataProvider('Ingredients', array(
                     'criteria' => array(
-                        'condition' => 'name LIKE :name OR e_number LIKE :eNumber',
-                        'params' => array(
-                            ':name' => '%' . str_replace(' ', '%', $searchModel->q) . '%',
-                            ':eNumber' => '%' . str_replace(array('e', 'E'), '', $searchModel->q) . '%'
-                        )
+                        'condition' => $searchObject->ingredientSearchQuery(),
+                        'params' => $searchObject->ingredientSearchParams()
                     ),
                     'sort' => array(
                         'defaultOrder' => 'name ASC'
