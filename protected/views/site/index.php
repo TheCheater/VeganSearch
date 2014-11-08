@@ -14,7 +14,7 @@
 
         <p>זקוקים לעזרה? <?php echo CHtml::link('מדריך לשימוש במנוע החיפוש', array('site/guide')); ?>.</p>
 
-        <p>במאגרינו יש <?php echo $count['products']; ?> מוצרים ו-<?php echo $count['ingredients']; ?> רכיבים, וזה ממשיך לעלות!</p>
+        <p>במאגרינו יש <?php echo number_format($count['products']); ?> מוצרים ו-<?php echo number_format($count['ingredients']); ?> רכיבים, וזה ממשיך לעלות!</p>
 
     </div>
 
