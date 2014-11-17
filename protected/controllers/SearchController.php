@@ -20,10 +20,29 @@ class SearchController extends VController
             {
                 $searchObject = new VSearch($searchModel->q);
 
+                $isVeganQuery = null;
+                if (isset($_GET['isVegan']))
+                    switch ($_GET['isVegan'])
+                    {
+                        case 'false':
+                            $isVeganQuery = 'AND is_vegan = 0 ';
+                            break;
+
+                        case 'true':
+                            $isVeganQuery = 'AND is_vegan = 1 ';
+                            break;
+
+                        case 'maybe':
+                            $isVeganQuery = 'AND is_vegan = 2 ';
+                            break;
+                    }
+
                 $products = new CActiveDataProvider('Products', array(
                     'criteria' => array(
-                        'condition' => $searchObject->productSearchQuery(),
-                        'params' => $searchObject->productSearchParams()
+                        'condition' => $searchObject->createSearchQuery($isVeganQuery . 'OR barcode = :barcode'),
+                        'params' => $searchObject->createParams(array(
+                            'barcode' => $searchModel->q
+                        ))
                     ),
                     'sort' => array(
                         'defaultOrder' => 'name ASC'
@@ -35,8 +54,10 @@ class SearchController extends VController
 
                 $ingredients = new CActiveDataProvider('Ingredients', array(
                     'criteria' => array(
-                        'condition' => $searchObject->ingredientSearchQuery(),
-                        'params' => $searchObject->ingredientSearchParams()
+                        'condition' => $searchObject->createSearchQuery($isVeganQuery . 'OR e_number LIKE :eNumber ' . $isVeganQuery),
+                        'params' => $searchObject->createParams(array(
+                            'eNumber' => '%' . str_replace(array('E', 'e'), '', $searchModel->q) . '%'
+                        ))
                     ),
                     'sort' => array(
                         'defaultOrder' => 'name ASC'

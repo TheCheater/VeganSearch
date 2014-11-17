@@ -3,16 +3,14 @@
 class VSearch
 {
 
-    private $_query = null;
     private $_queryWords = array();
 
     public function __construct($query = null)
     {
-        $this->_query = $query;
-        $this->_queryWords = explode(' ', $this->_query);
+        $this->_queryWords = explode(' ', $query);
     }
 
-    private function createSearchQuery($additionalQuery = null)
+    public function createSearchQuery($additionalQuery = null)
     {
         $searchQuery = null;
 
@@ -29,7 +27,7 @@ class VSearch
         return $searchQuery;
     }
 
-    private function createParams($additionalParams = array())
+    public function createParams($additionalParams = array())
     {
         $tempArray = array();
 
@@ -44,34 +42,6 @@ class VSearch
             $tempArray[':' . $key] = $value;
 
         return $tempArray;
-    }
-
-    /* Products search */
-
-    public function productSearchQuery()
-    {
-        return $this->createSearchQuery('OR barcode = :barcode');
-    }
-
-    public function productSearchParams()
-    {
-        return $this->createParams(array(
-            'barcode' => $this->_query
-        ));
-    }
-
-    /* Ingredients search */
-
-    public function ingredientSearchQuery()
-    {
-        return $this->createSearchQuery('OR e_number LIKE :eNumber');
-    }
-
-    public function ingredientSearchParams()
-    {
-        return $this->createParams(array(
-            'eNumber' => '%' . str_replace(array('E', 'e'), '', $this->_query) . '%'
-        ));
     }
 
 }
