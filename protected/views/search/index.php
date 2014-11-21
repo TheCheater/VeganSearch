@@ -1,6 +1,6 @@
 <?php Yii::app()->clientScript->registerScript('filters', '$(document).ready(function() {
     document.getElementById("search-filters-link").style.display = "initial";
-    ' . (isset($_GET['isVegan']) && in_array($_GET['isVegan'], array('false', 'true', 'maybe')) ? '' : 'document.getElementById("search-filters-container").style.display = "none";') . '
+    ' . ($hasChangedFilters ? '' : 'document.getElementById("search-filters-container").style.display = "none";') . '
     $("#search-filters-link").click(function() {
         $("#search-filters-container").slideToggle("fast");
     });
@@ -18,7 +18,7 @@
 
     <div id="search-filters-link" class="pull-left">
 
-        <a href="javascript:void(0)">סינון תוצאות</a>
+        <a href="javascript:void(0)">חיפוש מתקדם</a>
 
     </div>
 
@@ -26,19 +26,44 @@
 
         <div class="form-group">
 
-            <label>בחר את התוצאות שברצונך להציג</label>
+            <div class="search-filter-row">
 
-            <?php echo CHtml::dropDownList(
-                'isVegan',
-                Yii::app()->request->getParam('isVegan'),
-                array(
-                    'all' => 'הצג הכל',
-                    'true' => 'הצג רק מוצרים ורכיבים טבעוניים',
-                    'false' => 'הצג רק מוצרים ורכיבים שאינם טבעוניים',
-                    'maybe' => 'הצג רק רכיבים שעשויים להיות טבעוניים',
-                ),
-                array('class' => 'form-control')
-            ); ?>
+                <div class="search-filter-content">
+
+                    <label>טבעוני / לא טבעוני</label>
+
+                    <?php echo CHtml::dropDownList(
+                        'isVegan',
+                        Yii::app()->request->getParam('isVegan'),
+                        array(
+                            'all' => 'הצג הכל',
+                            'true' => 'הצג רק מוצרים ורכיבים טבעוניים',
+                            'false' => 'הצג רק מוצרים ורכיבים שאינם טבעוניים',
+                            'maybe' => 'הצג רק רכיבים שעשויים להיות טבעוניים',
+                        ),
+                        array('class' => 'form-control')
+                    ); ?>
+
+                </div>
+
+                <div class="search-filter-content">
+
+                    <label>עם תמונה / בלי תמונה</label>
+
+                    <?php echo CHtml::dropDownList(
+                        'hasImage',
+                        Yii::app()->request->getParam('hasImage'),
+                        array(
+                            'all' => 'הצג הכל',
+                            'true' => 'הצג רק מוצרים עם תמונה',
+                            'false' => 'הצג רק מוצרים ללא תמונה',
+                        ),
+                        array('class' => 'form-control')
+                    ); ?>
+
+                </div>
+
+            </div>
 
         </div>
 

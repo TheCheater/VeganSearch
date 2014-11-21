@@ -16,6 +16,10 @@ dd {
     margin: 0 0 10px;
 }
 
+label {
+    display: block;
+}
+
 .row {
     margin: 0;
 }
@@ -98,6 +102,49 @@ dd {
 
 #search-tabs {
     margin-top: 20px;
+}
+
+/* Search Filters */
+
+#search-filters-link {
+    display: none;
+    margin-top: 7px;
+}
+
+#search-filters-container {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #e3e3e3;
+}
+
+.search-filter-row {
+    display: table;
+}
+
+.search-filter-content {
+    display: block;
+    margin-top: 10px;
+}
+
+@media (min-width: 768px) {
+
+    .search-filter-row {
+        margin-top: 10px;
+    }
+
+    .search-filter-row:first-child {
+        margin-top: 0;
+    }
+
+    .search-filter-content {
+        display: table-cell;
+        margin-top: 0;
+    }
+
+    .search-filter-content:first-child {
+        padding-left: 20px;
+    }
+
 }
 
 /* Search Results */

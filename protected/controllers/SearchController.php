@@ -20,26 +20,46 @@ class SearchController extends VController
             {
                 $searchObject = new VSearch($searchModel->q);
 
-                $isVeganQuery = null;
+                $additionalSearchQuery = null;
+                $additionalProductsSearchQuery = null;
+                $hasChangedFilters = false;
+
                 if (isset($_GET['isVegan']))
                     switch ($_GET['isVegan'])
                     {
                         case 'false':
-                            $isVeganQuery = 'AND is_vegan = 0 ';
+                            $additionalSearchQuery .= 'AND is_vegan = 0 ';
+                            $hasChangedFilters = true;
                             break;
 
                         case 'true':
-                            $isVeganQuery = 'AND is_vegan = 1 ';
+                            $additionalSearchQuery .= 'AND is_vegan = 1 ';
+                            $hasChangedFilters = true;
                             break;
 
                         case 'maybe':
-                            $isVeganQuery = 'AND is_vegan = 2 ';
+                            $additionalSearchQuery .= 'AND is_vegan = 2 ';
+                            $hasChangedFilters = true;
+                            break;
+                    }
+
+                if (isset($_GET['hasImage']))
+                    switch ($_GET['hasImage'])
+                    {
+                        case 'true':
+                            $additionalProductsSearchQuery .= 'AND image != "" ';
+                            $hasChangedFilters = true;
+                            break;
+
+                        case 'false':
+                            $additionalProductsSearchQuery .= 'AND image = "" ';
+                            $hasChangedFilters = true;
                             break;
                     }
 
                 $products = new CActiveDataProvider('Products', array(
                     'criteria' => array(
-                        'condition' => $searchObject->createSearchQuery($isVeganQuery . 'OR barcode = :barcode'),
+                        'condition' => $searchObject->createSearchQuery($additionalSearchQuery . $additionalProductsSearchQuery . 'OR barcode = :barcode'),
                         'params' => $searchObject->createParams(array(
                             'barcode' => $searchModel->q
                         ))
@@ -54,7 +74,7 @@ class SearchController extends VController
 
                 $ingredients = new CActiveDataProvider('Ingredients', array(
                     'criteria' => array(
-                        'condition' => $searchObject->createSearchQuery($isVeganQuery . 'OR e_number LIKE :eNumber ' . $isVeganQuery),
+                        'condition' => $searchObject->createSearchQuery($additionalSearchQuery . 'OR e_number LIKE :eNumber ' . $additionalSearchQuery),
                         'params' => $searchObject->createParams(array(
                             'eNumber' => '%' . str_replace(array('E', 'e'), '', $searchModel->q) . '%'
                         ))
@@ -90,7 +110,8 @@ class SearchController extends VController
             $this->render('index', array(
                 'searchModel' => $searchModel,
                 'products' => $products,
-                'ingredients' => $ingredients
+                'ingredients' => $ingredients,
+                'hasChangedFilters' => $hasChangedFilters
             ));
     }
 

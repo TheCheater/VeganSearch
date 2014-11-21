@@ -16,12 +16,8 @@ class SearchForm extends CFormModel
     {
         return array(
 
-            // Required
-            array('q', 'required'),
-
             // Length
-            array('q', 'length', 'min' => 3, 'max' => 255,
-                'tooShort' => 'המינימום הוא 3 תווים.',
+            array('q', 'length', 'max' => 255,
                 'tooLong' => 'המקסימום הוא 255 תווים.')
 
         );
